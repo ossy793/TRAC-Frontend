@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Traffic Management System - Polygon Blockchain</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8247e5" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <h1>Smart Traffic System</h1>
+            </div>
+            <div class="wallet-section">
+                <button id="connectWallet" class="btn-wallet">Connect MetaMask</button>
+                <span id="walletAddress" class="wallet-address hidden"></span>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="home">Home</button>
+            <button class="tab" data-tab="prediction">AI Prediction</button>
+            <button class="tab" data-tab="verification">Verification</button>
+            <button class="tab" data-tab="register">Register</button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <!-- Home Tab -->
+            <div id="home-tab" class="tab-content active">
+                <h2>Welcome to Smart Traffic Management System</h2>
+                <p class="intro-text">Leveraging AI, Blockchain (Polygon), and Data Science to create safer, more efficient roads and contribute to SDG 11: Sustainable Cities and Communities.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card" data-navigate="prediction">
+                        <div class="feature-icon">🚗</div>
+                        <h3>AI-Powered Predictions</h3>
+                        <p>Get real-time traffic predictions and route recommendations based on accident data, congestion levels, and road conditions.</p>
+                        <button class="btn-feature">Get Started</button>
+                    </div>
+
+                    <div class="feature-card" data-navigate="verification">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Blockchain Verification</h3>
+                        <p>Verify driver licenses, insurance, and vehicle documents securely on the Polygon blockchain.</p>
+                        <button class="btn-feature">Verify Now</button>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number" id="totalAccidents">2,547</div>
+                        <div class="stat-label">Accidents Analyzed</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="roadUsers">15,892</div>
+                        <div class="stat-label">Road Users Tracked</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">92%</div>
+                        <div class="stat-label">Prediction Accuracy</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="verifiedDrivers">1,234</div>
+                        <div class="stat-label">Verified Drivers</div>
+                    </div>
+                </div>
+
+                <div class="sdg-banner">
+                    <h3>Contributing to SDG 11: Sustainable Cities</h3>
+                    <div class="sdg-points">
+                        <div class="sdg-point">
+                            <h4>Reduce Accidents</h4>
+                            <p>AI predicts high-risk areas and times</p>
+                        </div>
+                        <div class="sdg-point">
+                            <h4>Verify Compliance</h4>
+                            <p>Blockchain ensures valid documentation</p>
+                        </div>
+                        <div class="sdg-point">
+                            <h4>Optimize Traffic</h4>
+                            <p>Data science for efficient routing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Prediction Tab -->
+            <div id="prediction-tab" class="tab-content">
+                <h2>AI Traffic Prediction & Route Analysis</h2>
+                <div class="alert alert-info">
+                    <strong>Live Analysis:</strong> Our AI analyzes real-time data including accidents, road users, and weather conditions.
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="startLocation">Starting Location</label>
+                        <input type="text" id="startLocation" placeholder="e.g., Victoria Island, Lagos" value="Victoria Island">
+                    </div>
+                    <div class="form-group">
+                        <label for="endLocation">Destination</label>
+                        <input type="text" id="endLocation" placeholder="e.g., Ikeja, Lagos" value="Ikeja">
+                    </div>
+                </div>
+
+                <button id="analyzeRoute" class="btn btn-primary">Analyze Route with AI</button>
+
+                <div id="routeResults" class="results-container hidden">
+                    <div class="route-comparison">
+                        <div class="route-card route-danger" id="currentRoute">
+                            <!-- Results will be populated here -->
+                        </div>
+                        <div class="route-card route-success" id="recommendedRoute">
+                            <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="loadingSpinner" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Analyzing routes...</p>
+                </div>
+            </div>
+
+            <!-- Verification Tab -->
+            <div id="verification-tab" class="tab-content">
+                <h2>Blockchain Document Verification</h2>
+                <p class="intro-text">Verify driver documents stored on the Polygon blockchain. Enter a license number to check validity.</p>
+
+                <div class="form-group">
+                    <label for="verificationId">Driver License Number</label>
+                    <input type="text" id="verificationId" placeholder="e.g., DL12345">
+                    <small class="form-hint">Enter any license number to test</small>
+                </div>
+
+                <button id="verifyDriver" class="btn btn-primary">Verify on Blockchain</button>
+
+                <div id="verificationResults" class="results-container hidden">
+                    <!-- Results will be populated here -->
+                </div>
+
+                <div id="verifyLoadingSpinner" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Verifying on blockchain...</p>
+                </div>
+            </div>
+
+            <!-- Register Tab -->
+            <div id="register-tab" class="tab-content">
+                <h2>Register Driver Profile on Polygon Blockchain</h2>
+                <p class="intro-text">Register your driver information securely on the blockchain for verification.</p>
+
+                <div class="alert alert-warning">
+                    <strong>Note:</strong> Please connect your MetaMask wallet first before registering.
+                </div>
+
+                <form id="registerForm" class="register-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" placeholder="+234 xxx xxx xxxx" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="licenseNumber">Driver License Number *</label>
+                            <input type="text" id="licenseNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="licenseExpiry">License Expiry Date *</label>
+                            <input type="date" id="licenseExpiry" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehiclePlate">Vehicle Registration Number *</label>
+                            <input type="text" id="vehiclePlate" placeholder="ABC-123-XY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="insuranceProvider">Insurance Provider *</label>
+                            <input type="text" id="insuranceProvider" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="insuranceExpiry">Insurance Expiry *</label>
+                            <input type="date" id="insuranceExpiry" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="roadCertNumber">Road Certificate Number *</label>
+                            <input type="text" id="roadCertNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="certExpiry">Certificate Expiry *</label>
+                            <input type="date" id="certExpiry" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="walletAddressInput">Polygon Wallet Address</label>
+                            <input type="text" id="walletAddressInput" placeholder="0x..." readonly>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Register on Blockchain</button>
+                </form>
+
+                <div id="registerResults" class="results-container hidden">
+                    <!-- Results will be populated here -->
+                </div>
+
+                <div id="registerLoadingSpinner" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Registering on blockchain...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Smart Traffic Management System | Polygon Mumbai Testnet | Contributing to SDG 11</p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/web3.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
